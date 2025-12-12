@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'com.mycompany'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.xerial:sqlite-jdbc:3.51.1.0'
+    // Уберите slf4j если он вызывает проблемы
+    // implementation 'org.slf4j:slf4j-simple:2.0.9'
+}
+
+javafx {
+    version = '25.0.1'
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing', 'javafx.graphics' ]
+}
+
+application {
+    mainClass = 'com.mycompany.Main'
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(25)) // Измените на 25
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+run {
+    jvmArgs = ['-Dfile.encoding=UTF-8']
+}
